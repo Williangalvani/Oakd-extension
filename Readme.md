@@ -1,0 +1,1 @@
+This extension exposes the Stereo Depth Disparity and RGB video from Oak-D cameras into RTSP streams that can be displayed in Cockpit.

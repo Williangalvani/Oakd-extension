@@ -1,10 +1,45 @@
 FROM luxonis/depthai-library
 
-RUN apt install -y libgirepository1.0-dev gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-plugins-base libopenblas-dev gir1.2-gst-rtsp-server-1.0 python3-gi ninja-build
+RUN apt install -y libgirepository1.0-dev gstreamer1.0-plugins-base libopenblas-dev gir1.2-gst-rtsp-server-1.0 python3-gi
+
+RUN  apt install -y ninja-build && pip install numpy PyGObject requests && apt auto-remove -y ninja-build
+
 
 RUN git clone --depth 1 https://github.com/luxonis/depthai-experiments.git
-# RUN python3 -m pip install -r depthai-experiments/gen2-rtsp-streaming/requirements.txt
-RUN  pip install numpy
-RUN  pip install PyGObject
-COPY stream.py /stream.py
-entrypoint /bin/bash
+COPY src /src
+entrypoint python /src/stream.py
+
+LABEL version="1.0.0"
+LABEL permissions='\
+{\
+   "NetworkMode":"host",\
+   "HostConfig":{\
+      "Privileged":true,\
+      "NetworkMode":"host",\
+      "Binds":[\
+         "/dev/bus/usb:/dev/bus/usb"\
+      ],\
+      "DeviceCgroupRules":[\
+         "c 189:* rmw"\
+      ]\
+   }\
+}'
+
+LABEL authors='[\
+    {\
+        "name": "Willian Galvani",\
+        "email": "willian@bluerobotics.com"\
+    }\
+]'
+LABEL company='{\
+        "about": "",\
+        "name": "Blue Robotics",\
+        "email": "support@bluerobotics.com"\
+    }'
+LABEL type="example"
+LABEL readme='https://raw.githubusercontent.com/Williangalvani/Oakd-extension/{tag}/Readme.md'
+LABEL links='{\
+        "website": "https://github.com/Williangalvani/Oakd-extension/",\
+        "support": "https://github.com/Williangalvani/Oakd-extension/"\
+    }'
+LABEL requirements="core >= 1.1"
