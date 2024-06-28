@@ -36,7 +36,7 @@ LABEL company='{\
         "name": "Blue Robotics",\
         "email": "support@bluerobotics.com"\
     }'
-LABEL type="example"
+LABEL type="device-integration"
 LABEL readme='https://raw.githubusercontent.com/Williangalvani/Oakd-extension/{tag}/Readme.md'
 LABEL links='{\
         "website": "https://github.com/Williangalvani/Oakd-extension/",\
