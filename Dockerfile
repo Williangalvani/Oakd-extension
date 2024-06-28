@@ -4,8 +4,6 @@ RUN apt update && apt install -y libgirepository1.0-dev gstreamer1.0-plugins-bas
 
 RUN apt install -y ninja-build && pip install numpy PyGObject requests && apt auto-remove -y ninja-build
 
-
-RUN git clone --depth 1 https://github.com/luxonis/depthai-experiments.git
 COPY src /src
 entrypoint python /src/stream.py
 
