@@ -1,0 +1,18 @@
+name: Build and deploy extension to Bazaar
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and Publish Extension in BlueOS CLoud
+        uses: bluerobotics/blueos-cloud-action@0.0.1
+        with:
+          BCLOUD_PAT: ${{secrets.BCLOUD_PAT}}
+          PLATFORMS: linux/arm/v7,linux/arm64,linux/amd64
+          EXTENSION: 6d8d5473-ad48-4fb2-8836-d862f75899ca
+          
