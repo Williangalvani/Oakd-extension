@@ -1,0 +1,5 @@
+numpy==2.0.2
+opencv-python==4.6.0.66
+pycairo==1.27.0
+PyGObject==3.50.0
+requests==2.32.3

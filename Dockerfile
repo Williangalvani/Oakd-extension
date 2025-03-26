@@ -2,7 +2,10 @@ FROM luxonis/depthai-library
 
 RUN apt update && apt install -y libgirepository1.0-dev gstreamer1.0-plugins-base libopenblas-dev gir1.2-gst-rtsp-server-1.0 python3-gi
 
-RUN apt install -y ninja-build && pip install numpy PyGObject requests && apt auto-remove -y ninja-build
+RUN apt install -y ninja-build
+
+COPY requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt && apt auto-remove -y ninja-build
 
 COPY src /src
 entrypoint python /src/stream.py
